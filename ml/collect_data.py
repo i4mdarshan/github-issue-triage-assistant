@@ -40,16 +40,23 @@ def build_headers() -> dict[str, str]:
 
 def fetch_category(category: str, github_label: str) -> list[dict]:
     """Fetch issues carrying one GitHub label."""
-    url = f"https://api.github.com/repos/{REPOSITORY}/issues"
+    url = "https://api.github.com/search/issues"
     collected = []
 
     for page in range(1, MAX_PAGES + 1):
+        query = (
+            f'repo:{REPOSITORY} '
+            f'is:issue '
+            f'label:"{github_label}"'
+        )
+
         response = requests.get(
             url,
             headers=build_headers(),
             params={
-                "state": "all",
-                "labels": github_label,
+                "q": query,
+                "sort": "created",
+                "order": "desc",
                 "per_page": 100,
                 "page": page,
             },
@@ -59,20 +66,16 @@ def fetch_category(category: str, github_label: str) -> list[dict]:
         if response.status_code == 403:
             raise RuntimeError(
                 "GitHub API rate limit reached. "
-                "Wait before retrying or provide a GITHUB_TOKEN."
+                "Check GITHUB_TOKEN or wait before retrying."
             )
 
         response.raise_for_status()
-        results = response.json()
+        results = response.json()["items"]
 
         if not results:
             break
 
         for issue in results:
-            # GitHub's issue endpoint also returns pull requests.
-            if "pull_request" in issue:
-                continue
-
             title = (issue.get("title") or "").strip()
             body = (issue.get("body") or "").strip()
 

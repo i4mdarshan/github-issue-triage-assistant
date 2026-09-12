@@ -68,5 +68,34 @@ GitHub authentication is optional but recommended when collecting the dataset be
 2. Create a fine-grained GitHub personal access token with public repository read access.
 3. Add the token to .env
 
+
+## Dataset
+
+The training dataset is collected from public issues in the
+[`kubernetes/kubernetes`](https://github.com/kubernetes/kubernetes) repository using the GitHub REST API.
+
+GitHub labels are mapped to the application's categories:
+
+| GitHub label | Application category |
+|---|---|
+| `kind/bug` | Bug |
+| `kind/feature` | Feature |
+| `kind/documentation` | Documentation |
+| `kind/support` | Question |
+
+The current dataset contains **580 issues**, with **145 examples per category**. Duplicate and multi-category issues are removed to prevent conflicting labels.
+
+The generated CSV is intentionally excluded from Git. This keeps the repository small and allows the dataset to be reproduced from its original source.
+
+### Collecting the Dataset
+
+After configuring the optional `GITHUB_TOKEN`, run:
+
+```bash
+python -m ml.collect_data
+````
+
+
+
 ## Author
 ### Darshan Mahajan
