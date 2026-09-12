@@ -24,3 +24,8 @@ data/*.jsonl
 # Editor settings
 .vscode/
 .idea/
+
+# Environment variables
+.env
+.env.*
+!.env.example

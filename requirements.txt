@@ -6,3 +6,4 @@ joblib
 requests
 pytest
 httpx
+python-dotenv

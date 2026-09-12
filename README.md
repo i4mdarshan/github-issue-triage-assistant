@@ -56,5 +56,17 @@ github-issue-triage-assistant/
 ## Running the Project
 Local installation and usage instructions will be added as the application is developed.
 
+## Environment Variables
+
+GitHub authentication is optional but recommended when collecting the dataset because authenticated requests receive a higher API rate limit.
+
+1. Copy the environment template:
+
+   ```bash
+   cp .env.example .env
+   ````
+2. Create a fine-grained GitHub personal access token with public repository read access.
+3. Add the token to .env
+
 ## Author
 ### Darshan Mahajan
