@@ -56,6 +56,30 @@ github-issue-triage-assistant/
 ## Running the Project
 Local installation and usage instructions will be added as the application is developed.
 
+### Collect the dataset
+
+```bash
+python -m ml.collect_data
+```
+
+### Train the model
+```bash
+python -m ml.train
+```
+
+Training creates:
+- models/issue_classifier.joblib - serialized preprocessing and classification pipeline
+- models/metrics.json - evaluation metrics and confusion matrix
+
+
+Expand **Model Limitations** with:
+
+```markdown
+The current training data comes from one open-source repository, so writing conventions from that repository may influence predictions. Performance on issues from unrelated projects may be lower than the reported evaluation scores.
+
+The dataset is relatively small, and the question category currently produces more false positives than the other categories. Future versions could use multiple repositories, additional labeled examples, and transformer-based embeddings.
+```
+
 ## Environment Variables
 
 GitHub authentication is optional but recommended when collecting the dataset because authenticated requests receive a higher API rate limit.
@@ -107,6 +131,18 @@ The same reusable preprocessing function will be used during training and infere
 - Handles missing descriptions safely
 
 Preprocessing behavior is verified with automated tests.
+
+### Baseline Model Results
+
+The model was evaluated using a stratified 80/20 train-test split and five-fold cross-validation.
+
+| Metric | Score |
+|---|---:|
+| Test accuracy | 82.76% |
+| Test macro F1 | 83.02% |
+| Cross-validation macro F1 | 75.28% ± 1.65% |
+
+The feature category achieved the highest test F1 score at 91.23%. Question classification currently has the lowest precision and represents the primary area for future improvement.
 
 
 ## Author

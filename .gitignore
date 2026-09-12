@@ -29,3 +29,7 @@ data/*.jsonl
 .env
 .env.*
 !.env.example
+
+# Keep the deployable production model
+!models/issue_classifier.joblib
+!models/metrics.json
