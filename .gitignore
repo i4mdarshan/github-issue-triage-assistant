@@ -1,0 +1,26 @@
+# Python virtual.venv/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environment variables
+.env
+.env.*
+
+# Local datasets
+data/*.csv
+data/*.json
+data/*.jsonl
+
+# Keep empty data directory in Git
+!data/.gitkeep
+
+# Operating system files
+.DS_Store
+
+# Editor settings
+.vscode/
+.idea/
