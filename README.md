@@ -95,6 +95,18 @@ After configuring the optional `GITHUB_TOKEN`, run:
 python -m ml.collect_data
 ````
 
+### Text Preprocessing
+
+The same reusable preprocessing function will be used during training and inference to prevent training-serving skew. It:
+
+- Combines the issue title and description
+- Removes GitHub issue-template HTML comments
+- Removes explicit `/kind` commands to prevent label leakage
+- Removes URLs and normalizes whitespace
+- Limits unusually long issue text
+- Handles missing descriptions safely
+
+Preprocessing behavior is verified with automated tests.
 
 
 ## Author
