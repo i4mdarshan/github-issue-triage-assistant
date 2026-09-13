@@ -4,18 +4,96 @@ An ML-powered web application that automatically classifies GitHub issues into c
 
 The project demonstrates an end-to-end machine learning workflow, including data preparation, model training, evaluation, API development, frontend integration, and deployment.
 
-## Project Status
+## Features
 
-🚧 Currently under development.
+- Collects labeled public issues through the GitHub REST API
+- Cleans issue templates and removes label leakage
+- Classifies issues as bug, feature, documentation, or question
+- Returns confidence scores and all category probabilities
+- Exposes predictions through a documented FastAPI endpoint
+- Includes automated preprocessing, prediction, and API tests
 
-## Planned Features
+### In Progress
 
-- Classify an issue from its title and description
-- Display the predicted category and confidence score
-- Compare multiple category probabilities
-- Provide predictions through a REST API
-- Offer a responsive HTML, CSS, and JavaScript interface
-- Deploy the complete application as a live demo
+- Responsive frontend interface
+- Containerized deployment
+- Public live demo
+
+## Running Locally
+
+### Install the application
+
+```bash
+git clone git@github.com:i4mdarshan/github-issue-triage-assistant.git
+cd github-issue-triage-assistant
+
+python3.11 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+The trained model is included in the repository, so dataset collection and training are not required to run the application.
+
+### Start the API
+
+```bash
+uvicorn backend.main:app --reload
+```
+
+Open the interactive API documentation at:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+### Collect the dataset
+
+```bash
+python -m ml.collect_data
+```
+
+### Retrain the model
+
+```bash
+python -m ml.train
+```
+
+Retraining creates:
+
+- `models/issue_classifier.joblib`
+- `models/metrics.json`
+
+
+## API Endpoints
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| `GET` | `/api/health` | Check API and model availability |
+| `POST` | `/api/predict` | Classify an issue |
+
+Example prediction request:
+
+```json
+{
+  "title": "Application crashes during startup",
+  "body": "The server exits when the configuration file is missing."
+}
+```
+
+Example response:
+
+```json
+{
+  "label": "bug",
+  "confidence": 0.71,
+  "probabilities": {
+    "bug": 0.71,
+    "documentation": 0.08,
+    "feature": 0.09,
+    "question": 0.12
+  }
+}
+```
 
 ## Machine Learning Approach
 
@@ -53,16 +131,13 @@ github-issue-triage-assistant/
 └── README.md
 ```
 
-## Running the Project
-Local installation and usage instructions will be added as the application is developed.
-
-### Collect the dataset
+## Collect the dataset
 
 ```bash
 python -m ml.collect_data
 ```
 
-### Train the model
+## Train the model
 ```bash
 python -m ml.train
 ```
