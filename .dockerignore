@@ -1,0 +1,15 @@
+.git
+.github
+.venv
+**/__pycache__/
+**/*.py[cod]
+.pytest_cache
+.coverage
+htmlcov/
+.env
+.env.*
+data/
+tests/
+README.md
+requirements-dev.txt
+.DS_Store

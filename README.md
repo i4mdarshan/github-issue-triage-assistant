@@ -17,10 +17,11 @@ The project demonstrates an end-to-end machine learning workflow, including data
 - Visualizes every category probability
 - Flags ambiguous predictions for human review
 - Includes an SVG favicon and mobile-friendly styling
+- Runs as a reproducible, non-root Docker container
+- Exposes a container health check for deployment platforms
 
 ### In Progress
 
-- Containerized deployment
 - Public live demo
 
 ## Running Locally
@@ -41,6 +42,30 @@ For local development and automated tests, install the development dependencies:
 ```bash
 pip install -r requirements-dev.txt
 ```
+
+## Running with Docker
+
+Build the production image:
+
+```bash
+docker build -t github-issue-triage-assistant .
+```
+
+Start the container:
+
+```bash
+docker run --rm \
+  --name issue-triage-app \
+  -p 7860:7860 \
+  github-issue-triage-assistant
+```
+
+Open the application at:
+```text
+http://127.0.0.1:7860
+````
+
+The container includes the trained model, runs as a non-root user, and exposes a health check at /api/health.
 
 The trained model is included in the repository, so dataset collection and training are not required to run the application.
 
