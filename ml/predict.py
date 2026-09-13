@@ -10,6 +10,8 @@ from ml.preprocessing import combine_issue_text
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_MODEL_PATH = PROJECT_ROOT / "models" / "issue_classifier.joblib"
+REVIEW_CONFIDENCE_THRESHOLD = 0.35
+REVIEW_MARGIN_THRESHOLD = 0.05
 
 
 class IssueClassifier:
@@ -36,8 +38,8 @@ class IssueClassifier:
         probabilities = self.pipeline.predict_proba([text])[0]
         class_names = self.pipeline.named_steps["classifier"].classes_
 
-        probability_by_label = {
-            str(label): round(float(probability), 4)
+        raw_probability_by_label = {
+            str(label): float(probability)
             for label, probability in zip(
                 class_names,
                 probabilities,
@@ -46,12 +48,34 @@ class IssueClassifier:
         }
 
         predicted_label = max(
-            probability_by_label,
-            key=probability_by_label.get,
+            raw_probability_by_label,
+            key=raw_probability_by_label.get,
         )
+
+        ranked_probabilities = sorted(
+            raw_probability_by_label.values(),
+            reverse=True,
+        )
+
+        confidence = ranked_probabilities[0]
+        confidence_margin = (
+            ranked_probabilities[0] - ranked_probabilities[1]
+        )
+
+        requires_review = (
+            confidence < REVIEW_CONFIDENCE_THRESHOLD
+            or confidence_margin < REVIEW_MARGIN_THRESHOLD
+        )
+
+        probability_by_label = {
+            label: round(probability, 4)
+            for label, probability in raw_probability_by_label.items()
+        }
 
         return {
             "label": predicted_label,
-            "confidence": probability_by_label[predicted_label],
+            "confidence": round(confidence, 4),
+            "confidence_margin": round(confidence_margin, 4),
+            "requires_review": requires_review,
             "probabilities": probability_by_label,
         }

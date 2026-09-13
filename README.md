@@ -12,8 +12,11 @@ The project demonstrates an end-to-end machine learning workflow, including data
 - Returns confidence scores and all category probabilities
 - Exposes predictions through a documented FastAPI endpoint
 - Includes automated preprocessing, prediction, and API tests
-- Provides a responsive vanilla HTML, CSS, and JavaScript interface
+- Provides a responsive vanilla HTML, CSS, and JavaScript interface with examples
 - Includes example issues, loading and error states, and probability bars
+- Visualizes every category probability
+- Flags ambiguous predictions for human review
+- Includes an SVG favicon and mobile-friendly styling
 
 ### In Progress
 
@@ -92,12 +95,14 @@ Example response:
 ```json
 {
   "label": "bug",
-  "confidence": 0.71,
+  "confidence": 0.294,
+  "confidence_margin": 0.037,
+  "requires_review": true,
   "probabilities": {
-    "bug": 0.71,
-    "documentation": 0.08,
-    "feature": 0.09,
-    "question": 0.12
+    "bug": 0.294,
+    "documentation": 0.257,
+    "feature": 0.24,
+    "question": 0.209
   }
 }
 ```
@@ -225,6 +230,15 @@ The model was evaluated using a stratified 80/20 train-test split and five-fold 
 | Cross-validation macro F1 | 75.28% ± 1.65% |
 
 The feature category achieved the highest test F1 score at 91.23%. Question classification currently has the lowest precision and represents the primary area for future improvement.
+
+### Uncertainty Handling
+
+A prediction is marked for human review when:
+
+- Its highest probability is below 35%, or
+- The margin between its two highest probabilities is below five percentage points
+
+This prevents ambiguous predictions from being presented as definitive automated decisions.
 
 
 ## Author

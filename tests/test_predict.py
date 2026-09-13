@@ -22,8 +22,13 @@ def test_prediction_contains_expected_fields(
     assert set(result) == {
         "label",
         "confidence",
+        "confidence_margin",
+        "requires_review",
         "probabilities",
     }
+
+    assert 0 <= result["confidence_margin"] <= 1
+    assert isinstance(result["requires_review"], bool)
 
     assert result["label"] in {
         "bug",

@@ -41,6 +41,8 @@ class PredictionResponse(BaseModel):
 
     label: str
     confidence: float
+    confidence_margin: float
+    requires_review: bool
     probabilities: dict[str, float]
 
 

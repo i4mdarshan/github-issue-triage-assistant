@@ -98,6 +98,11 @@ function renderPrediction(result) {
   confidenceValue.textContent =
     `${(result.confidence * 100).toFixed(1)}%`;
 
+  const reviewStatus = document.querySelector("#review-status");
+  reviewStatus.dataset.review = String(result.requires_review);
+  reviewStatus.textContent = result.requires_review
+    ? "Low confidence - maintainer review recommended"
+    : "Prediction is sufficiently distinct";
   probabilityList.replaceChildren();
 
   const probabilities = Object.entries(result.probabilities).sort(

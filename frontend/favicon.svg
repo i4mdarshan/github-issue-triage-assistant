@@ -1,0 +1,65 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 64 64"
+  role="img"
+  aria-labelledby="favicon-title"
+>
+  <title id="favicon-title">Issue triage</title>
+
+  <defs>
+    <linearGradient id="accent" x1="8" y1="8" x2="56" y2="56">
+      <stop offset="0" stop-color="#67e8f9" />
+      <stop offset="1" stop-color="#a78bfa" />
+    </linearGradient>
+  </defs>
+
+  <rect
+    x="2"
+    y="2"
+    width="60"
+    height="60"
+    rx="16"
+    fill="#0f1c2e"
+    stroke="url(#accent)"
+    stroke-width="3"
+  />
+
+  <circle cx="16" cy="18" r="3.5" fill="#67e8f9" />
+  <circle cx="16" cy="32" r="3.5" fill="#67e8f9" />
+  <circle cx="16" cy="46" r="3.5" fill="#67e8f9" />
+
+  <path
+    d="M20 18h5c5 0 8 4 8 9v10c0 5 3 9 8 9h2"
+    fill="none"
+    stroke="#67e8f9"
+    stroke-width="3"
+    stroke-linecap="round"
+  />
+
+  <path
+    d="M20 32h13"
+    fill="none"
+    stroke="#67e8f9"
+    stroke-width="3"
+    stroke-linecap="round"
+  />
+
+  <path
+    d="M20 46h5c5 0 8-4 8-9V27c0-5 3-9 8-9h2"
+    fill="none"
+    stroke="#67e8f9"
+    stroke-width="3"
+    stroke-linecap="round"
+  />
+
+  <circle cx="47" cy="32" r="10" fill="url(#accent)" />
+
+  <path
+    d="m42.5 32 3 3 6-7"
+    fill="none"
+    stroke="#07111f"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

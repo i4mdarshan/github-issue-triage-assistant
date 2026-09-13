@@ -50,6 +50,9 @@ def test_prediction_endpoint(client: TestClient) -> None:
         "question",
     }
 
+    assert 0 <= result["confidence_margin"] <= 1
+    assert isinstance(result["requires_review"], bool)
+
 
 def test_rejects_invalid_request(client: TestClient) -> None:
     response = client.post(
@@ -75,3 +78,9 @@ def test_static_styles_are_served(client: TestClient) -> None:
 
     assert response.status_code == 200
     assert "text/css" in response.headers["content-type"]
+
+def test_favicon_is_served(client: TestClient) -> None:
+    response = client.get("/static/favicon.svg")
+
+    assert response.status_code == 200
+    assert "image/svg+xml" in response.headers["content-type"]
