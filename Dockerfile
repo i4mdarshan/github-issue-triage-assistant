@@ -8,7 +8,7 @@ WORKDIR /app
 
 RUN useradd \
     --create-home \
-    --uid 10001 \
+    --uid 1000 \
     --shell /usr/sbin/nologin \
     appuser
 
