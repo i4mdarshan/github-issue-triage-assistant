@@ -36,6 +36,12 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+For local development and automated tests, install the development dependencies:
+
+```bash
+pip install -r requirements-dev.txt
+```
+
 The trained model is included in the repository, so dataset collection and training are not required to run the application.
 
 ### Start the API
