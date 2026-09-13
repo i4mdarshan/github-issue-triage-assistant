@@ -3,6 +3,8 @@
 [Live Demo](https://github-issue-triage-assistant.onrender.com/)
 [Interactive API Docs](https://github-issue-triage-assistant.onrender.com/docs)
 
+![GitHub Issue Triage Assistant interface showing an issue classification and probability scores](docs/application-preview.png)
+
 An ML-powered web application that automatically classifies GitHub issues into categories such as **bug**, **feature request**, **documentation**, and **question**.
 
 The project demonstrates an end-to-end machine learning workflow, including data preparation, model training, evaluation, API development, frontend integration, and deployment.
