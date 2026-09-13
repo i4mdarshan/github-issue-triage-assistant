@@ -1,5 +1,8 @@
 # GitHub Issue Triage Assistant
 
+[Live Demo](https://github-issue-triage-assistant.onrender.com/)
+[Interactive API Docs](https://github-issue-triage-assistant.onrender.com/docs)
+
 An ML-powered web application that automatically classifies GitHub issues into categories such as **bug**, **feature request**, **documentation**, and **question**.
 
 The project demonstrates an end-to-end machine learning workflow, including data preparation, model training, evaluation, API development, frontend integration, and deployment.
@@ -19,10 +22,7 @@ The project demonstrates an end-to-end machine learning workflow, including data
 - Includes an SVG favicon and mobile-friendly styling
 - Runs as a reproducible, non-root Docker container
 - Exposes a container health check for deployment platforms
-
-### In Progress
-
-- Public live demo
+- Deploys automatically from GitHub to a public Render service service
 
 ## Running Locally
 
@@ -189,6 +189,15 @@ Training creates:
 - models/issue_classifier.joblib - serialized preprocessing and classification pipeline
 - models/metrics.json - evaluation metrics and confusion matrix
 
+## Deployment
+
+The application is deployed as a Docker-based Render web service.
+
+- **Application:** [github-issue-triage.onrender.com](https://github-issue-triage-assistant.onrender.com/)
+- **Health check:** [`/api/health`](https://github-issue-triage-assistant.onrender.com/api/health)
+- **API documentation:** [`/docs`](https://github-issue-triage-assistant.onrender.com/docs)
+
+Render automatically rebuilds and deploys the application after changes are pushed to `main`. Free instances may require a short startup period after being inactive.
 
 Expand **Model Limitations** with:
 
