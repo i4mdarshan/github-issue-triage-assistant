@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: github-issue-triage-assistant
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    autoDeployTrigger: commit

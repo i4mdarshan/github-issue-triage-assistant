@@ -1,14 +1,3 @@
----
-title: GitHub Issue Triage Assistant
-emoji: 🧭
-colorFrom: cyan
-colorTo: indigo
-sdk: docker
-app_port: 7860
-pinned: false
-short_description: ML-powered classification of GitHub issues
----
-
 # GitHub Issue Triage Assistant
 
 An ML-powered web application that automatically classifies GitHub issues into categories such as **bug**, **feature request**, **documentation**, and **question**.
