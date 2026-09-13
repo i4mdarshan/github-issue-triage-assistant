@@ -1,5 +1,7 @@
 # GitHub Issue Triage Assistant
 
+[![CI](https://github.com/i4mdarshan/github-issue-triage-assistant/actions/workflows/ci.yml/badge.svg)](https://github.com/i4mdarshan/github-issue-triage-assistant/actions/workflows/ci.yml)
+
 [Live Demo](https://github-issue-triage-assistant.onrender.com/)
 [Interactive API Docs](https://github-issue-triage-assistant.onrender.com/docs)
 

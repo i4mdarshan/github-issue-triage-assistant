@@ -4,4 +4,4 @@ services:
     runtime: docker
     plan: free
     healthCheckPath: /api/health
-    autoDeployTrigger: commit
+    autoDeployTrigger: checksPass
