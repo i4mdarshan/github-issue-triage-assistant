@@ -61,3 +61,17 @@ def test_rejects_invalid_request(client: TestClient) -> None:
     )
 
     assert response.status_code == 422
+
+
+def test_frontend_is_served(client: TestClient) -> None:
+    response = client.get("/")
+
+    assert response.status_code == 200
+    assert "GitHub Issue Triage Assistant" in response.text
+
+
+def test_static_styles_are_served(client: TestClient) -> None:
+    response = client.get("/static/styles.css")
+
+    assert response.status_code == 200
+    assert "text/css" in response.headers["content-type"]

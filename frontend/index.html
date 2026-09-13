@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Classify GitHub issues using a machine learning model."
+    />
+
+    <title>GitHub Issue Triage Assistant</title>
+
+    <link rel="stylesheet" href="/static/styles.css" />
+    <script src="/static/app.js" defer></script>
+  </head>
+
+  <body>
+    <main class="app-shell">
+      <header class="hero">
+        <span class="eyebrow">Machine Learning Demo</span>
+
+        <h1>GitHub Issue Triage Assistant</h1>
+
+        <p class="hero-description">
+          Automatically classify GitHub issues as bugs, features,
+          documentation requests, or questions.
+        </p>
+
+        <div class="technology-list" aria-label="Technologies used">
+          <span>TF-IDF</span>
+          <span>Logistic Regression</span>
+          <span>FastAPI</span>
+        </div>
+      </header>
+
+      <div class="workspace">
+        <section class="card input-card">
+          <div class="section-heading">
+            <div>
+              <span class="step-number">01</span>
+              <h2>Describe the issue</h2>
+            </div>
+
+            <p>Enter an issue manually or load an example.</p>
+          </div>
+
+          <form id="issue-form">
+            <div class="field">
+              <div class="field-heading">
+                <label for="issue-title">Issue title</label>
+                <span id="title-count">0 / 300</span>
+              </div>
+
+              <input
+                id="issue-title"
+                name="title"
+                type="text"
+                minlength="3"
+                maxlength="300"
+                placeholder="Example: Application crashes during startup"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <div class="field-heading">
+                <label for="issue-body">Issue description</label>
+                <span id="body-count">0 / 20,000</span>
+              </div>
+
+              <textarea
+                id="issue-body"
+                name="body"
+                rows="9"
+                maxlength="20000"
+                placeholder="Explain the current behavior, expected behavior, and any relevant context."
+              ></textarea>
+            </div>
+
+            <fieldset class="examples">
+              <legend>Try an example</legend>
+
+              <div class="example-buttons">
+                <button type="button" class="example-button" data-example="bug">
+                  Bug
+                </button>
+
+                <button
+                  type="button"
+                  class="example-button"
+                  data-example="feature"
+                >
+                  Feature
+                </button>
+
+                <button
+                  type="button"
+                  class="example-button"
+                  data-example="documentation"
+                >
+                  Documentation
+                </button>
+
+                <button
+                  type="button"
+                  class="example-button"
+                  data-example="question"
+                >
+                  Question
+                </button>
+              </div>
+            </fieldset>
+
+            <p id="form-error" class="error-message" role="alert" hidden></p>
+
+            <button id="submit-button" class="primary-button" type="submit">
+              <span class="button-label">Analyze issue</span>
+              <span class="button-arrow" aria-hidden="true">→</span>
+            </button>
+          </form>
+        </section>
+
+        <section class="card result-card" aria-live="polite">
+          <div class="section-heading">
+            <div>
+              <span class="step-number">02</span>
+              <h2>Model prediction</h2>
+            </div>
+
+            <p>Review the classification and confidence scores.</p>
+          </div>
+
+          <div id="empty-state" class="empty-state">
+            <div class="empty-icon" aria-hidden="true">AI</div>
+            <h3>Ready to classify</h3>
+            <p>
+              Submit an issue to see the model’s predicted category and
+              probability distribution.
+            </p>
+          </div>
+
+          <div id="loading-state" class="loading-state" hidden>
+            <div class="spinner" aria-hidden="true"></div>
+            <p>Analyzing issue text...</p>
+          </div>
+
+          <div id="prediction-result" class="prediction-result" hidden>
+            <div class="prediction-summary">
+              <span class="summary-label">Predicted category</span>
+              <span id="predicted-label" class="prediction-badge"></span>
+
+              <p class="confidence">
+                <strong id="confidence-value">0%</strong>
+                model confidence
+              </p>
+            </div>
+
+            <div class="probability-section">
+              <h3>Category probabilities</h3>
+
+              <div id="probability-list" class="probability-list"></div>
+            </div>
+
+            <p class="model-note">
+              Predictions assist issue organization and should be reviewed
+              by a human maintainer.
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <footer>
+        <p>
+          Built with scikit-learn, FastAPI, and vanilla JavaScript.
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>

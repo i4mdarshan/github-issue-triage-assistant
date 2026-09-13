@@ -12,10 +12,11 @@ The project demonstrates an end-to-end machine learning workflow, including data
 - Returns confidence scores and all category probabilities
 - Exposes predictions through a documented FastAPI endpoint
 - Includes automated preprocessing, prediction, and API tests
+- Provides a responsive vanilla HTML, CSS, and JavaScript interface
+- Includes example issues, loading and error states, and probability bars
 
 ### In Progress
 
-- Responsive frontend interface
 - Containerized deployment
 - Public live demo
 
@@ -38,6 +39,12 @@ The trained model is included in the repository, so dataset collection and train
 
 ```bash
 uvicorn backend.main:app --reload
+```
+
+Open the web application:
+
+```text
+http://127.0.0.1:8000
 ```
 
 Open the interactive API documentation at:

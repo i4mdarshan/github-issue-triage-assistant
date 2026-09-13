@@ -7,6 +7,12 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 
 from ml.predict import IssueClassifier
+from pathlib import Path
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+FRONTEND_DIR = PROJECT_ROOT / "frontend"
 
 
 class IssueRequest(BaseModel):
@@ -54,6 +60,18 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan,
 )
+
+app.mount(
+    "/static",
+    StaticFiles(directory=FRONTEND_DIR),
+    name="static",
+)
+
+
+@app.get("/", include_in_schema=False)
+async def serve_frontend() -> FileResponse:
+    """Serve the frontend application."""
+    return FileResponse(FRONTEND_DIR / "index.html")
 
 
 @app.get("/api/health")
